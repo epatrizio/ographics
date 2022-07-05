@@ -5,6 +5,10 @@ https://github.com/ocaml/graphics/blob/master/examples/graph_example.ml
 Warning!
 This code is not mine! It has its own license specified in the link above.
 Here, it's its refactoring for its export in Javascript via js_of_ocaml.
+
+---- Refactoring notes
+ * Graphics remember_mode isn't supported by graphics_js >> the final behavior is not exactly the same (Mouse_motion KO)
+ * Graphics while true loop / wait_next_event >> Transformed : Graphics_js loop / handler
 *)
 
 open Js_of_ocaml
@@ -168,20 +172,24 @@ let caml () =
     |]
 
 let loop_handler st =
-  if st.keypressed then print_endline "nothing!";
-  if st.button then (
-    draw_image (caml ()) st.mouse_x st.mouse_y;
-  );
-  let x = st.mouse_x + 16 and y = st.mouse_y + 16 in
-    moveto 0 y;
-    lineto (x - 25) y;
-    moveto 10000 y;
-    lineto (x + 25) y;
-    moveto x 0;
-    lineto x (y - 25);
-    moveto x 10000;
-    lineto x (y + 25);
-    draw_image (caml ()) st.mouse_x st.mouse_y
+  try
+    if st.keypressed then raise Exit;
+    if st.button then (
+      (* remember_mode true; *)
+      draw_image (caml ()) st.mouse_x st.mouse_y;
+      (* remember_mode false; *)
+    );
+    let x = st.mouse_x + 16 and y = st.mouse_y + 16 in
+      moveto 0 y;
+      lineto (x - 25) y;
+      moveto 10000 y;
+      lineto (x + 25) y;
+      moveto x 0;
+      lineto x (y - 25);
+      moveto x 10000;
+      lineto x (y + 25);
+      draw_image (caml ()) st.mouse_x st.mouse_y
+  with Exit -> close_graph ()
 
 let init canvas =
   print_endline "initializing";
@@ -193,7 +201,7 @@ let init canvas =
       done
     done;
     set_color (rgb 0 0 0);
-    loop [Mouse_motion;Key_pressed;Button_down] loop_handler
+    loop [(*Mouse_motion;*)Key_pressed;Button_down] loop_handler
   in
   ()
 
