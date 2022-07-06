@@ -6,6 +6,10 @@ Warning!
 This code is not mine! It has its own license specified in the link above.
 Here, it's its refactoring for its export in Javascript via js_of_ocaml.
 
+---- Topics
+ * User interactions
+ * Event model
+
 ---- Refactoring notes
  * Graphics remember_mode isn't supported by graphics_js >> the final behavior is not exactly the same (Mouse_motion KO)
  * Graphics while true loop / wait_next_event >> Transformed : Graphics_js loop / handler

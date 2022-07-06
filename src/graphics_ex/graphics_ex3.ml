@@ -6,14 +6,15 @@ Warning!
 This code is not mine! It has its own license specified in the link above.
 Here, it's its refactoring for its export in Javascript via js_of_ocaml.
 
-----
+---- Topic
+ * Async calls, threads
 
 js_of_ocaml compilation message:
 There are some missing primitives
 Missing primitives:
   caml_mutex_new
   caml_thread_initialize
->> This type ocaml graphics process cannot be export. js_of_ocaml does not implement it!
+>> This ocaml graphics features cannot be export. js_of_ocaml does not implement it!
 *)
 
 open Js_of_ocaml

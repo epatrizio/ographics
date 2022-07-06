@@ -5,6 +5,9 @@ https://github.com/ocaml/graphics/blob/master/examples/graph_test.ml
 Warning!
 This code is not mine! It has its own license specified in the link above.
 Here, it's its refactoring for its export in Javascript via js_of_ocaml.
+
+---- Topic
+ * Standard drawing primitives
 *)
 
 open Js_of_ocaml
