@@ -4,6 +4,16 @@ Event management is the graphics to js export real challenge!
 
 Here is a simple example with a typical context : conditional events*
 In Graphics_js, no wait_next_event function. So what possibilities ... ?
+
+---- failed experiments
+ * declare wait_next_event as external function and implement it in javascript
+    external wait_next_event : event list -> 
+      < mouse_x : int Js.prop ;
+        mouse_y : int Js.prop ;
+        button : bool Js.prop ;
+        keypressed : char Js.prop ;
+        key : string Js.prop > Js.t = "caml_gr_wait_next_event"
+  KO : flow and event models are so different between js and ocaml (see lib.js)
 *)
 
 open Js_of_ocaml
