@@ -18,3 +18,7 @@ my_demo:
 event_studies:
 	ocamlfind ocamlc -package js_of_ocaml -package js_of_ocaml-ppx -package js_of_ocaml-lwt.graphics -linkpkg -o src/demo.byte src/examples/event_studies.ml
 	js_of_ocaml src/demo.byte
+
+event:
+	ocamlfind ocamlc -I src/ -o src/demo.byte -package js_of_ocaml -package js_of_ocaml-ppx -package js_of_ocaml-lwt.graphics -linkpkg src/graphics_js_ext.ml src/event.ml
+	js_of_ocaml src/demo.byte
