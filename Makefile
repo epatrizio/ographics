@@ -28,3 +28,7 @@ minesweeper_compile:
 
 minesweeper_run:
 	./minesweeper_game
+
+minesweeper_web:
+	ocamlfind ocamlc -I src/ -o src/demo.byte -package js_of_ocaml -package js_of_ocaml-ppx -package js_of_ocaml-lwt.graphics -linkpkg src/graphics_js_ext.ml src/minesweeper/mw_game_web.ml
+	js_of_ocaml src/demo.byte
