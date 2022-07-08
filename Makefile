@@ -22,3 +22,9 @@ event_studies:
 event:
 	ocamlfind ocamlc -I src/ -o src/demo.byte -package js_of_ocaml -package js_of_ocaml-ppx -package js_of_ocaml-lwt.graphics -linkpkg src/graphics_js_ext.ml src/event.ml
 	js_of_ocaml src/demo.byte
+
+minesweeper_compile:
+	ocamlfind ocamlopt -o minesweeper_game -package graphics -linkpkg src/minesweeper/mw_game.ml
+
+minesweeper_run:
+	./minesweeper_game

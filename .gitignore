@@ -29,4 +29,5 @@ setup.log
 _opam/
 
 demo.js
+minesweeper_game
 .vscode/
