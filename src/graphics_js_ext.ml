@@ -78,7 +78,11 @@ let wait_next_event evt_list : status Lwt.t =
 
     if List.mem Key_pressed evt_list then
       pick_list := (Lwt_js_events.keypress doc >>= (fun ev ->
-        Lwt.return { mouse_x = !mouse_x; mouse_y = !mouse_y; button = !button; keypressed = true; key = '0' }))
+        let key =
+          try char_of_int (Js.Optdef.get ev##.charCode (fun _ -> 0))
+          with Invalid_argument _ -> '0'
+        in
+        Lwt.return { mouse_x = !mouse_x; mouse_y = !mouse_y; button = !button; keypressed = true; key = key }))
         :: !pick_list;
 
     Lwt.pick !pick_list
