@@ -176,8 +176,8 @@ let () =
     | Gagne -> revele (); print_endline "Won :)"; exit 0
     | Exit -> print_endline "Goodbye and see you soon!"; exit 0 *)
 
-(* Game loop refactoring *)
-let rec game_loop () =
+(* Game loop refactoring V1 *)
+(* let rec game_loop () =
   (wait_next_event [Button_down; Key_pressed]) >>=
     fun st ->
       try
@@ -187,8 +187,25 @@ let rec game_loop () =
           if c = 'q' then raise Exit else pose_drapeau (st.mouse_x,st.mouse_y) (* mouse_pos () *)
         end;
         if !nb_drapeaux = nbb && !nb_drapeaux + !nb_decouvert = col * lig then raise Gagne
-        else game_loop () (* memo: recursive call *)
+        else game_loop () (* memo: add recursive call *)
       with 
+      | Perdu -> revele (); print_endline "Lost :("; Lwt.return () (* exit 0 *)
+      | Gagne -> revele (); print_endline "Won :)"; Lwt.return () (* exit 0 *)
+      | Exit -> print_endline "Goodbye and see you soon!"; Lwt.return () (* exit 0 *)
+*)
+
+(* Game loop refactoring V2 *)
+let rec game_loop () =
+    let* st = wait_next_event [Button_down; Key_pressed] in
+    try
+      if st.button then click (st.mouse_x,st.mouse_y); (* mouse_pos () *)
+      if st.keypressed then begin
+        let c = st.key in
+        if c = 'q' then raise Exit else pose_drapeau (st.mouse_x,st.mouse_y) (* mouse_pos () *)
+      end;
+      if !nb_drapeaux = nbb && !nb_drapeaux + !nb_decouvert = col * lig then raise Gagne
+      else game_loop () (* memo: add recursive call *)
+    with 
       | Perdu -> revele (); print_endline "Lost :("; Lwt.return () (* exit 0 *)
       | Gagne -> revele (); print_endline "Won :)"; Lwt.return () (* exit 0 *)
       | Exit -> print_endline "Goodbye and see you soon!"; Lwt.return () (* exit 0 *)

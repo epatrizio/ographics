@@ -43,6 +43,8 @@ let compute_real_pos (elt : #Dom_html.element Js.t) ev =
 ;;
 (* ------ *)
 
+let (let*) = (>>=)
+
 let mouse_x, mouse_y = ref 0, ref 0
 let button = ref false
 
