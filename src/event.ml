@@ -49,13 +49,26 @@ open Graphics_js_ext
           loop () *)
 
 (* V3 : with monadic bind operator redefinition *)
-let rec loop () =
+(* let rec loop () =
   let* st1 = wait_next_event [Button_down;Key_pressed] in
     if st1.keypressed then close_graph ();
     let* st2 = wait_next_event [Button_up] in
       moveto st1.mouse_x st1.mouse_y;
       lineto st2.mouse_x st2.mouse_y;
-      loop ()
+      loop () *)
+
+(* V3 bis : V3 with exception as the original version.
+   Warning, 'try' must be after the first wait_next_event *)
+let rec loop () =
+  let* st1 = wait_next_event [Button_down;Key_pressed] in
+    try
+      if st1.keypressed then raise Exit;
+        let* st2 = wait_next_event [Button_up] in
+          moveto st1.mouse_x st1.mouse_y;
+          lineto st2.mouse_x st2.mouse_y;
+          loop ()
+    with
+    | Exit -> close_graph (); Lwt.return ()
 
 let init canvas =
   print_endline "initializing";
