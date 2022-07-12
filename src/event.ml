@@ -70,6 +70,20 @@ let rec loop () =
     with
     | Exit -> close_graph (); Lwt.return ()
 
+(* V4 : with while loop and non recursive function. KO!!
+   Impossible because lwt binding works only in a recursive context *)
+(* let loop () =
+  try
+    while true do
+      let* st1 = wait_next_event [Button_down;Key_pressed] in
+        if st1.keypressed then raise Exit;
+        let* st2 = wait_next_event [Button_up] in
+          moveto st1.mouse_x st1.mouse_y;
+          lineto st2.mouse_x st2.mouse_y;
+    done
+  with
+  | Exit -> close_graph () *)
+
 let init canvas =
   print_endline "initializing";
   Graphics_js.open_canvas canvas;
