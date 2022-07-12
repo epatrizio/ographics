@@ -4,6 +4,8 @@ DEBUG=false
 JSOC=js_of_ocaml src/demo.byte
 JSOC_DEBUG=js_of_ocaml --pretty src/demo.byte
 
+MINESWEEPER_EXE=minesweeper_game
+
 my_js_of_ocaml:
 	if [ "$(DEBUG)" = "true" ]; then $(JSOC_DEBUG); else $(JSOC); fi
 
@@ -33,11 +35,16 @@ event_:
 event: event_ my_js_of_ocaml
 
 minesweeper_compile:
-	ocamlfind ocamlopt -o minesweeper_game -package graphics -linkpkg src/minesweeper/mw_game.ml
+	ocamlfind ocamlopt -o $(MINESWEEPER_EXE) -package graphics -linkpkg src/minesweeper/mw_game.ml
 
 minesweeper_run:
-	./minesweeper_game
+	./$(MINESWEEPER_EXE)
 
 minesweeper_web_:
 	ocamlfind ocamlc -I src/ -o src/demo.byte -package js_of_ocaml -package js_of_ocaml-ppx -package js_of_ocaml-lwt.graphics -linkpkg src/graphics_js_ext.ml src/minesweeper/mw_game_web.ml
 minesweeper_web: minesweeper_web_ my_js_of_ocaml
+
+clean:
+	rm -rf src/demo.byte src/demo.js $(MINESWEEPER_EXE)
+	rm -rf */*.o */*.cmo */*.cmi
+	rm -rf */*/*.o */*/*.cmo */*/*.cmi
