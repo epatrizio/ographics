@@ -46,5 +46,5 @@ minesweeper_web: minesweeper_web_ my_js_of_ocaml
 
 clean:
 	rm -rf src/demo.byte src/demo.js $(MINESWEEPER_EXE)
-	rm -rf */*.o */*.cmo */*.cmi
-	rm -rf */*/*.o */*/*.cmo */*/*.cmi
+	rm -rf */*.o */*.cmo */*.cmi */*.cmx
+	rm -rf */*/*.o */*/*.cmo */*/*.cmi */*/*.cmx
