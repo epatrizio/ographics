@@ -4,13 +4,13 @@ This project is a study whose objective is to bring the OCaml Graphics library t
 This will allow multiple examples written in OCaml Graphics to be exported to the
 [Learn-OCaml](https://github.com/ocaml-sf/learn-ocaml) learning web platform.
 
-*This study, done at [IRILL - Research and Innovation on Free Software](https://www.irill.org)
+*This study, done at [IRILL - Research and Innovation on Free Software](https://www.irill.org),
 is part of my professional training.*
 
 ## Technical environment
 
 * [OCaml Graphics](https://github.com/ocaml/graphics) is the standard OCaml library for drawing, manipulating bitmaps and simply interacting with the end user (keyboard, mouse).
-* [Js_of_ocaml](https://ocsigen.org/js_of_ocaml/) is an open source component of web development tools suite written in OCaml by [Ocsigen](https://ocsigen.org). Js_of_ocaml is a compiler whose target is Javascript.
+* [Js_of_ocaml](https://ocsigen.org/js_of_ocaml/) is an open source component of web development tools suite written in OCaml by [Ocsigen](https://ocsigen.org). Js_of_ocaml is a compiler whose target is Javascript from OCaml bytecode.
 
 ## Challenge and execution
 
